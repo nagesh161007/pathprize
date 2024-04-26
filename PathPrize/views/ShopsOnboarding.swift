@@ -44,14 +44,14 @@ struct ShopsOnboarding: View {
 }
 
 func saveDetails(address: String) {
-    var userId = 1
+    let userId = 1
     let geoCoder = CLGeocoder()
 
     geoCoder.geocodeAddressString(address) { placemarks, error in
         let placemark = placemarks?.first
         let lat = placemark?.location?.coordinate.latitude
         let lon = placemark?.location?.coordinate.longitude
-        print("User Id: \(userId) Lat: \(lat), Lon: \(lon)")
+        print("User Id: \(userId) Lat: \(String(describing: lat)), Lon: \(String(describing: lon))")
     }
 }
 

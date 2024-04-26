@@ -35,7 +35,7 @@ struct HomePage: View {
                 }
                 .tag("activity")
             
-            SettingsView()
+            Settings()
                 .tabItem {
                     Image(systemName: "gear")
                     Text("Settings")

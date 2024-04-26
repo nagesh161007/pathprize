@@ -18,6 +18,7 @@ struct UserProfile: Codable {
     let userType: String?
     let onboardingState: String
     let distance: Int?
+    let notify: Bool
     
     enum CodingKeys: String, CodingKey {
         case id
@@ -30,5 +31,6 @@ struct UserProfile: Codable {
         case userType = "user_type"
         case onboardingState = "onboarding_state"
         case distance
+        case notify
     }
 }

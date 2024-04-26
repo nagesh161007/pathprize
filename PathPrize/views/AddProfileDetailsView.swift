@@ -18,7 +18,7 @@ struct PersonalInfoView: View {
     @State private var username: String = ""
     @State private var lastname: String = ""
     @State private var dateOfBirth: Date = Date()
-    @State private var distance: Double = 2 // Default to 2 miles
+    @State private var distance: Double = 1
     @State private var selectedPhoto: PhotosPickerItem?
     @State private var profileImage: AvatarImage?
     @State private var showingImagePicker = false
@@ -66,6 +66,12 @@ struct PersonalInfoView: View {
                 TextField("User Name", text: $username)
                     .textFieldStyle(RoundedBorderTextFieldStyle()).padding(.vertical)
                 
+                //custom binding as distance in slider is casuing issues
+//                let elapsedTime = Binding(
+//                            get: { Double(self.setInformationVM.elapsedRestTime) },
+//                            set: { self.setInformationVM.elapsedRestTime = Int($0) } // Or other custom logic
+//                )
+                
                 VStack {
                     Slider(value: $distance, in: 1...10, step: 1).padding(.vertical)
                     Text("Set your goal: \(Int(distance)) miles").padding(.vertical)
@@ -100,7 +106,7 @@ struct PersonalInfoView: View {
             
           try await supabase
             .from("profiles")
-            .update([ "firstname": firstname,  "lastname": lastname,  "username": username, "avatar_url": imageURL, "onboarding_state": "COMPLETED" ])
+            .update([ "firstname": firstname,  "lastname": lastname,  "username": username, "avatar_url": imageURL, "onboarding_state": "COMPLETED", "distance": String(distance) ])
             .eq("id", value: currentUser.id)
             .execute()
             Router.shared.replace(to: .homeView)

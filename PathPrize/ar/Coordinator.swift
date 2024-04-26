@@ -63,7 +63,7 @@ class Coordinator: NSObject, CLLocationManagerDelegate, ARCoachingOverlayViewDel
         let coordinate = CLLocationCoordinate2D(latitude: 42.33196248895828, longitude: -71.09752618431293)
         
         let geoAnchor = ARGeoAnchor(coordinate: coordinate)
-        let anchor = AnchorEntity(anchor: geoAnchor)
+        let anchor = AnchorEntity()
         self.loadModel(from: modelURL, to: anchor)
         
 //        downloadModel(from: modelURL) { [weak self] localURL in

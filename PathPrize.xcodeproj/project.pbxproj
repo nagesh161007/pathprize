@@ -256,8 +256,6 @@
 				9062EC022BDB0F4300330074 /* services */,
 				907B8C7D2BD8469B00AB7948 /* DateHelper.swift */,
 				907B8C7E2BD8469B00AB7948 /* Notifications.swift */,
-				907B8C8E2BD8469B00AB7948 /* Settings.swift */,
-				907B8C8F2BD8469B00AB7948 /* ShopsOnboarding.swift */,
 				907B8C7F2BD8469B00AB7948 /* Map */,
 				9062EBF92BDAE13200330074 /* ar */,
 				90A89F102BD743F10049BF3A /* router */,
@@ -310,6 +308,8 @@
 		90BEF8B42BD1AEBC0093C814 /* views */ = {
 			isa = PBXGroup;
 			children = (
+				907B8C8F2BD8469B00AB7948 /* ShopsOnboarding.swift */,
+				907B8C8E2BD8469B00AB7948 /* Settings.swift */,
 				90F50DFB2BD5AD0300B7D45B /* LandingView.swift */,
 				90F50DFD2BD5B81B00B7D45B /* LoginView.swift */,
 				90F50DFF2BD5B82800B7D45B /* SignUpUserView.swift */,
@@ -693,7 +693,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"PathPrize/Preview Content\"";
-				DEVELOPMENT_TEAM = F79A7NWMZU;
+				DEVELOPMENT_TEAM = QAYV888PZM;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = PathPrize/Info.plist;
@@ -712,7 +712,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.pathprize;
+				PRODUCT_BUNDLE_IDENTIFIER = com.pathprize.babu;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -728,7 +728,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"PathPrize/Preview Content\"";
-				DEVELOPMENT_TEAM = F79A7NWMZU;
+				DEVELOPMENT_TEAM = QAYV888PZM;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = PathPrize/Info.plist;
@@ -747,7 +747,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.pathprize;
+				PRODUCT_BUNDLE_IDENTIFIER = com.pathprize.babu;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;

@@ -5,7 +5,6 @@
 //  Created by nagesh sairam on 4/23/24.
 //
 
-import Foundation
 import SwiftUI
 
 struct AvatarImage: Transferable, Equatable {

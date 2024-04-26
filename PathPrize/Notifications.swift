@@ -20,6 +20,22 @@ struct NotificationManager {
         }
     }
     
+    static func checkNotificationAuthorization(completion: @escaping (Bool) -> Void) {
+        UNUserNotificationCenter.current().getNotificationSettings { settings in
+            if settings.authorizationStatus == .authorized {
+                DispatchQueue.main.async {
+                    completion(true)
+                }
+            } else {
+                requestNotificationAuthorization()
+                DispatchQueue.main.async {
+                    completion(false)
+                }
+            }
+        }
+    }
+
+    
     // Schedule daily notification at user-selected time
     static func scheduleNotification(notificationTimeString: String) {
         // Convert the time in string to date
