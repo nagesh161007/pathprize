@@ -28,6 +28,7 @@ struct MapView: View {
     @State private var sheetHeight: CGFloat = 120
     @State private var lookAroundScene: MKLookAroundScene?
     @State private var isLookAroundPresented = false
+    @State private var activityId: Int?
     @State private var isArViewPresented = false
 
     private let locationManager = LocationManager.shared
@@ -91,8 +92,8 @@ struct MapView: View {
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(.leading, 20)
-                BottomSheetView(sheetHeight: $sheetHeight, questStatus: $questStatus, 
-                                selectedMapItem: $selectedMapItem, startAction: startNewQuest, claimReward: claimReward,  startNavigation: {
+                ActivityStatusView(sheetHeight: $sheetHeight, questStatus: $questStatus,
+                                selectedMapItem: $selectedMapItem, startAction: unlockQuest, claimReward: claimReward,  startNavigation: {
                     Task {
                         print("starting Navigation")
                         await startNavigation()
@@ -110,9 +111,37 @@ struct MapView: View {
         }
     }
 
-    private func claimReward(){
-        isArViewPresented = true
+    private func claimReward() {
+        print("reward claim clicked")
+        Task {
+            do {
+                // Ensure selectedMapItem and activityId are not nil
+                guard let activityId = activityId, let selectedMapItem = selectedMapItem else {
+                    print("Error: Missing activityId or selectedMapItem")
+                    return
+                }
+                
+                print("Updaing Activity")
+                
+                print(activityId)
+
+                // Await the updateActivity call
+                try await ActivityService.updateActivity(
+                    id: activityId,
+                    endTime: Date(),
+                    endLocationLongitude: selectedMapItem.placemark.coordinate.longitude,
+                    endLocationLatitude: selectedMapItem.placemark.coordinate.latitude,
+                    status: "COMPLETED"
+                )
+                print("Activity updated successfully.")
+            } catch {
+                // Handle any errors that occur during the update
+                print("Error updating activity: \(error)")
+            }
+        }
+//        isArViewPresented = true
     }
+
     
     private func updateQuestStatusIfNeeded() {
         if locationManager.hasReachedLocation {
@@ -121,9 +150,9 @@ struct MapView: View {
         }
     }
     
-    private func startNewQuest() {
+    private func unlockQuest() async {
         print("start New Quest")
-        print(locationManager.manager.location)
+        
         if let currentLocation = locationManager.manager.location {
             mapItems = locationManager.generateThreeRandomLocations(currentLocation: currentLocation).map { location in
                 MKMapItem(placemark: MKPlacemark(coordinate: location))
@@ -131,13 +160,62 @@ struct MapView: View {
             print("mapItem count", mapItems.count)
             position = .region(MKCoordinateRegion(center: currentLocation.coordinate, latitudinalMeters: 5000, longitudinalMeters: 5000))
         }
+        
+        if let currentLocation = locationManager.manager.location {
+            // Prepare map items as before
+            mapItems = locationManager.generateThreeRandomLocations(currentLocation: currentLocation).map { location in
+                MKMapItem(placemark: MKPlacemark(coordinate: location))
+            }
+            position = .region(MKCoordinateRegion(center: currentLocation.coordinate, latitudinalMeters: 5000, longitudinalMeters: 5000))
+
+        } else {
+            print("Current location is not available.")
+        }
+        
+    }
+    
+    
+    private func createActivity(currentLocation: CLLocation) {
+        print("Creating Acitivty")
+        Task {
+            do {
+                // Asynchronous fetch of the current user
+                let currentUser = try await supabase.auth.session.user
+                // Create an Activity with the current user's ID
+                let newActivity = Activity(
+                    id: nil,
+                    createdAt: Date(),
+                    userId: currentUser.id,  // Convert user ID to UUID
+                    date: Date(),
+                    startTime: Date(),
+                    endTime: nil,
+                    startLocationLatitude: currentLocation.coordinate.latitude,
+                    startLocationLongitude: currentLocation.coordinate.longitude,
+                    endLocationLatitude: nil,
+                    endLocationLongitude: nil,
+                    rewardId: nil,
+                    status: "STARTED"
+                )
+
+                // Attempt to create an activity in the database
+                let createdActivity: Activity = try await ActivityService.createActivity(activity: newActivity)
+                print(createdActivity)
+                activityId = createdActivity.id
+                print("Activity created successfully: \(createdActivity)")
+            } catch {
+                print("Error occurred: \(error)")
+            }
+        }
     }
     
     private func startNavigation() async {
+        if let currentLocation = locationManager.manager.location {
+            createActivity(currentLocation: currentLocation)
+        }
         print("Going to call monitoing for selected Location")
         await locationManager.startRegionMonitoring(monitoringlocation: (selectedMapItem?.placemark.coordinate)!)
        let launchOptions = [MKLaunchOptionsDirectionsModeKey:MKLaunchOptionsDirectionsModeDriving]
-        selectedMapItem?.openInMaps(launchOptions: launchOptions)
+//        selectedMapItem?.openInMaps(launchOptions: launchOptions)
     }
 
     private func requestCalculateDirections() async {
@@ -149,11 +227,11 @@ struct MapView: View {
     }
 }
 
-struct BottomSheetView: View {
+struct ActivityStatusView: View {
     @Binding var sheetHeight: CGFloat
     @Binding var questStatus: QuestStatus
     @Binding var selectedMapItem: MKMapItem?
-    var startAction: () -> Void
+    var startAction: () async -> Void
     var claimReward: () -> Void
     var startNavigation: () -> Void
     var minHeight: CGFloat = 120  // Default minimum height
@@ -168,7 +246,6 @@ struct BottomSheetView: View {
                     .padding()
                     .fontWeight(.bold)
 
-                Spacer()
 
                 if questStatus == .unlocked {
                     Button(action: selectedMapItem != nil ? startNavigation : {},
@@ -202,7 +279,9 @@ struct BottomSheetView: View {
                 } else {
                     Button(action: {
                         questStatus = .unlocked
-                        startAction()
+                        Task {
+                            await startAction()
+                        }
                     }) {
                         HStack {
                             Image(systemName: "lock.fill")
@@ -217,8 +296,6 @@ struct BottomSheetView: View {
                 }
             }
             .padding(.horizontal)
-            
-            Spacer()
         }
         .frame(maxWidth: .infinity)
         .frame(height: sheetHeight)

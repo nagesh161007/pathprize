@@ -26,21 +26,21 @@ struct HomePage: View {
                     Image(systemName: "giftcard")
                     Text("Rewards")
                 }
-                .tag("reward")
+                .tag("reward").navigationTitle("Rewards")
 
-            ActivityView()
+            ActivitiesView()
                 .tabItem {
                     Image(systemName: "flame.fill")
                     Text("Activity")
                 }
-                .tag("activity")
+                .tag("activity").navigationTitle("Recent Activity")
             
             SettingsView()
                 .tabItem {
                     Image(systemName: "gear")
                     Text("Settings")
                 }
-                .tag("settings")
+                .tag("settings").navigationTitle("Settings")
 
         }.onAppear {
             NotificationManager.requestNotificationAuthorization()
@@ -51,8 +51,6 @@ struct HomePage: View {
 
 // Dummy views for each tab
 struct SettingsView: View { var body: some View { Text("Settings") } }
-struct RewardsView: View { var body: some View { Text("Rewards") } }
-struct ActivityView: View { var body: some View { Text("Activity") } }
 
 struct HomePage_Previews: PreviewProvider {
     static var previews: some View {

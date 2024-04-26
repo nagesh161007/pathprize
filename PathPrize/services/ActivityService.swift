@@ -9,15 +9,10 @@ import Foundation
 import Supabase
 
 class ActivityService {
-    private var supabaseClient: SupabaseClient
-    
-    init(supabaseClient: SupabaseClient) {
-        self.supabaseClient = supabaseClient
-    }
     
     // Function to get all activities
-    func getAllActivities() async throws -> [Activity] {
-        return try await supabaseClient
+    static func getAllActivities() async throws -> [Activity] {
+        return try await supabase
             .from("activities")
             .select("*")
             .order("date", ascending: false)
@@ -25,8 +20,8 @@ class ActivityService {
     }
     
     // Function to get a single activity by ID
-    func getActivityById(id: Int) async throws -> Activity {
-        return try await supabaseClient
+    static func getActivityById(id: Int) async throws -> Activity {
+        return try await supabase
             .from("activities")
             .select("*")
             .eq("id", value: id)
@@ -35,28 +30,48 @@ class ActivityService {
     }
 
     // Function to create an activity
-    func createActivity(activity: Activity) async throws -> Activity {
-        return try await supabaseClient
-            .from("activities")
-            .insert(activity)
-            .execute().value
+     static func createActivity(activity: Activity) async throws -> Activity {
+         let activity: Activity = try await supabase.from("activities")
+             .insert(activity)
+             .select()
+             .single()
+             .execute()
+             .value
+         return activity
     }
 
-    // Function to update an activity
-    func updateActivity(id: Int, updatedActivity: Activity) async throws -> Activity {
-        return try await supabaseClient
-            .from("activities")
-            .update(updatedActivity)
-            .eq("id", value: id)
-            .execute().value
+    static func updateActivity(id: Int, endTime: Date, endLocationLongitude: Double, endLocationLatitude: Double, status: String) async throws {
+        do {
+            print("Updating activity with ID: \(id)")
+            try await supabase.from("activities")
+                .update([
+                    "end_time": endTime.iso8601String,
+                    "end_location_longitude": String(endLocationLongitude),
+                    "end_location_latitude": String(endLocationLatitude),
+                    "status": status
+                ])
+                .eq("id", value: id)
+                .execute()
+            print("Activity successfully updated")
+        } catch {
+            print("Failed to update activity: \(error)")
+            throw error  // Optionally rethrow to handle elsewhere
+        }
     }
 
     // Function to delete an activity
-    func deleteActivity(id: Int) async throws {
-        _ = try await supabaseClient
+    static func deleteActivity(id: Int) async throws {
+        _ = try await supabase
             .from("activities")
             .delete()
             .eq("id", value: id)
             .execute().value
+    }
+}
+
+
+extension Date {
+    var iso8601String: String {
+        return ISO8601DateFormatter().string(from: self)
     }
 }

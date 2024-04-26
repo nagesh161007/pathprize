@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		90191DB52BDB79DF00753E32 /* ActivitiesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90191DB42BDB79DF00753E32 /* ActivitiesView.swift */; };
+		90191DB72BDC1C4500753E32 /* ActivityDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90191DB62BDC1C4500753E32 /* ActivityDetailView.swift */; };
+		90191DB92BDC5A9900753E32 /* RewardsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90191DB82BDC5A9900753E32 /* RewardsView.swift */; };
+		90191DBB2BDC5D3100753E32 /* RewardsDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90191DBA2BDC5D3100753E32 /* RewardsDetailView.swift */; };
 		9062EBF72BDADE9400330074 /* shoe.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 9062EBF32BDADE9300330074 /* shoe.usdz */; };
 		9062EBFB2BDAE14000330074 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9062EBFA2BDAE14000330074 /* Coordinator.swift */; };
 		9062EBFD2BDAE18B00330074 /* ARViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9062EBFC2BDAE18B00330074 /* ARViewExtensions.swift */; };
@@ -79,6 +83,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		90191DB42BDB79DF00753E32 /* ActivitiesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivitiesView.swift; sourceTree = "<group>"; };
+		90191DB62BDC1C4500753E32 /* ActivityDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityDetailView.swift; sourceTree = "<group>"; };
+		90191DB82BDC5A9900753E32 /* RewardsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RewardsView.swift; sourceTree = "<group>"; };
+		90191DBA2BDC5D3100753E32 /* RewardsDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RewardsDetailView.swift; sourceTree = "<group>"; };
 		9062EBF32BDADE9300330074 /* shoe.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = shoe.usdz; sourceTree = "<group>"; };
 		9062EBFA2BDAE14000330074 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		9062EBFC2BDAE18B00330074 /* ARViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARViewExtensions.swift; sourceTree = "<group>"; };
@@ -321,6 +329,10 @@
 				90A89F132BD74BEE0049BF3A /* LoadingView.swift */,
 				9094903A2BD8C4EF008627DE /* MapView.swift */,
 				9094903C2BD9F9E8008627DE /* LookAroundPreview.swift */,
+				90191DB42BDB79DF00753E32 /* ActivitiesView.swift */,
+				90191DB62BDC1C4500753E32 /* ActivityDetailView.swift */,
+				90191DB82BDC5A9900753E32 /* RewardsView.swift */,
+				90191DBA2BDC5D3100753E32 /* RewardsDetailView.swift */,
 			);
 			path = views;
 			sourceTree = "<group>";
@@ -495,12 +507,14 @@
 				9062EC102BDB0FD000330074 /* BusinessModel.swift in Sources */,
 				907B8C922BD8469B00AB7948 /* Notifications.swift in Sources */,
 				907B8C982BD8469B00AB7948 /* LocationManager.swift in Sources */,
+				90191DB52BDB79DF00753E32 /* ActivitiesView.swift in Sources */,
 				907B8C952BD8469B00AB7948 /* locationCoordinateExtension.swift in Sources */,
 				90BEF8A62BD1ACFF0093C814 /* supabase.swift in Sources */,
 				90A89F162BD767100049BF3A /* UserProfile.swift in Sources */,
 				9062EBFB2BDAE14000330074 /* Coordinator.swift in Sources */,
 				90F50E022BD5F05300B7D45B /* AddProfileDetailsView.swift in Sources */,
 				90A89F0D2BD6EDA40049BF3A /* AuthManager.swift in Sources */,
+				90191DB92BDC5A9900753E32 /* RewardsView.swift in Sources */,
 				907B8C972BD8469B00AB7948 /* MeasurementFormatter.swift in Sources */,
 				9062EC142BDB0FF100330074 /* RewardModel.swift in Sources */,
 				9094903D2BD9F9E8008627DE /* LookAroundPreview.swift in Sources */,
@@ -509,12 +523,14 @@
 				907B8C942BD8469B00AB7948 /* MapUtilities.swift in Sources */,
 				90F50E0A2BD60C1C00B7D45B /* HomePage.swift in Sources */,
 				90F50DFC2BD5AD0300B7D45B /* LandingView.swift in Sources */,
+				90191DB72BDC1C4500753E32 /* ActivityDetailView.swift in Sources */,
 				9062EC0E2BDB0FBF00330074 /* ActivityModel.swift in Sources */,
 				90A89F142BD74BEE0049BF3A /* LoadingView.swift in Sources */,
 				90BEF8BD2BD1B2DB0093C814 /* ProfileModel.swift in Sources */,
 				9062EC122BDB0FDC00330074 /* OfferModel.swift in Sources */,
 				907B8C962BD8469B00AB7948 /* MKCoordinateRegionExtension.swift in Sources */,
 				90F50E082BD5FE6E00B7D45B /* SignUpBusinessView.swift in Sources */,
+				90191DBB2BDC5D3100753E32 /* RewardsDetailView.swift in Sources */,
 				907B8C9E2BD8469B00AB7948 /* Settings.swift in Sources */,
 				90A89F122BD743FF0049BF3A /* Router.swift in Sources */,
 				9094903B2BD8C4EF008627DE /* MapView.swift in Sources */,
