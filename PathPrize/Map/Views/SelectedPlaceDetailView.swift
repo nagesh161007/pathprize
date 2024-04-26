@@ -48,7 +48,7 @@ struct SelectedPlaceDetailView: View {
     private func startNavigation(to mapItem: MKMapItem) {
             let launchOptions = [MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeDriving]
             mapItem.openInMaps(launchOptions: launchOptions)
-        }
+    }
 }
 
 #Preview {

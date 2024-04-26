@@ -41,14 +41,48 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
     let manager = CLLocationManager()
     static let shared = LocationManager()
     var error: LocationError? = nil
+    var monitor: CLMonitor?
+    var hasReachedLocation = false
     
     var region: MKCoordinateRegion = MKCoordinateRegion()
     
     private override init() {
         super.init()
+        manager.allowsBackgroundLocationUpdates = true
+        manager.showsBackgroundLocationIndicator = true
         manager.desiredAccuracy = kCLLocationAccuracyBest
         self.manager.delegate = self
     }
+    
+    func startRegionMonitoring(monitoringlocation: CLLocationCoordinate2D) async {
+        
+        print("startRegionMonitoring started")
+        
+        monitor = await CLMonitor("RegionMonitor")
+        
+        await monitor?.add( CLMonitor.CircularGeographicCondition(center: monitoringlocation, radius: 300), identifier: "quest-destination", assuming: .unsatisfied)
+        
+        print("Added Location to Monitor")
+        
+        Task {
+            for try await event in await monitor!.events {
+                print(event.state.rawValue)
+                switch event.state {
+                    case .satisfied:
+                        print("satisfied")
+                    hasReachedLocation = true
+                    NotificationManager.scheduleCongratulationsNotification()
+                    await monitor?.remove("quest-destination")
+                    case .unknown, .unsatisfied:
+                        print("unknown or unsatisfied")
+                    @unknown default:
+                        print("unknown default")
+                }
+            }
+        }
+        
+    }
+    
 }
 
 extension LocationManager {
@@ -62,6 +96,7 @@ extension LocationManager {
     }
     
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
+        print(manager.authorizationStatus.rawValue)
         switch manager.authorizationStatus {
             case .notDetermined:
                 manager.requestAlwaysAuthorization()
@@ -76,49 +111,37 @@ extension LocationManager {
         }
     }
     
-    func startMonitoringDestination(_ destination: CLLocationCoordinate2D, radius: CLLocationDistance = 100, identifier: String = "DestinationRegion") {
-        // Check if the device supports geofencing
-        if CLLocationManager.isMonitoringAvailable(for: CLCircularRegion.self) {
-            // Define a geofence region
-            let geofenceRegion = CLCircularRegion(center: destination, radius: radius, identifier: identifier)
-            geofenceRegion.notifyOnEntry = true
-            geofenceRegion.notifyOnExit = false
-
-            // Start monitoring the geofence region
-            manager.startMonitoring(for: geofenceRegion)
-        } else {
-            print("Geofencing is not supported on this device!")
-        }
-    }
-
-    func stopMonitoringDestination(identifier: String = "DestinationRegion") {
-        // Stop monitoring the geofence region
-        if let region = manager.monitoredRegions.first(where: { $0.identifier == identifier }) {
-            manager.stopMonitoring(for: region)
-        }
-    }
-    
     func generateThreeRandomLocations(currentLocation: CLLocation) -> [CLLocationCoordinate2D] {
-        let distance = 402.3360
+        let distance = 202.3360
         var randomLocations: [CLLocationCoordinate2D] = []
         
-        for _ in 1...3 {
-            let bearing = Double.random(in: 0..<360)
-            let randomLocation = currentLocation.coordinate(at: distance, bearing: bearing)
-            randomLocations.append(randomLocation)
-        }
+//        for _ in 1...3 {
+//            let bearing = Double.random(in: 0..<360)
+//            let randomLocation = currentLocation.coordinate(at: distance, bearing: bearing)
+//            randomLocations.append(randomLocation)
+//        }
         
+        
+        randomLocations.append(CLLocationCoordinate2D(latitude: 42.33077439474914, longitude: -71.09583226833279))
+        
+        
+        randomLocations.append(CLLocationCoordinate2D(latitude: 42.3325035776856, longitude: -71.09647817779118))
+        
+        randomLocations.append(CLLocationCoordinate2D(latitude: 42.3376185, longitude: -71.0901376))
+        
+        print("random location generated")
+
         return randomLocations
     }
     
-    func locationManager(_ manager: CLLocationManager, didEnterRegion region: CLRegion) {
-        if region.identifier == "DestinationRegion" {
-            // User has arrived at the destination
-            NotificationManager.scheduleCongratulationsNotification()
-            // Optionally stop monitoring to save power if needed
-            stopMonitoringDestination(identifier: region.identifier)
-        }
-    }
+//    func locationManager(_ manager: CLLocationManager, didEnterRegion region: CLRegion) {
+//        if region.identifier == "DestinationRegion" {
+//            // User has arrived at the destination
+//            NotificationManager.scheduleCongratulationsNotification()
+//            // Optionally stop monitoring to save power if needed
+//            stopMonitoringDestination(identifier: region.identifier)
+//        }
+//    }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         

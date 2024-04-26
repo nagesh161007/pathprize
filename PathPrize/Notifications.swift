@@ -53,26 +53,36 @@ struct NotificationManager {
     
     //Congratulations message at trip end
     static func scheduleCongratulationsNotification() {
-        // Instantiate a variable for UNMutableNotificationContent
-        let content = UNMutableNotificationContent()
-        content.title = "Congratulations!"
-        content.body = "You've reached your destination! Tap to check your reward."
-        content.sound = .default
-        
-        // Configure the notification interaction
-        content.categoryIdentifier = "CONGRATULATIONS_CATEGORY"
-        
-        // The trigger is immediate because we call this when the user arrives at the destination
-        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false)
+        // Request notification permission
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound]) { granted, error in
+            if granted {
+                print("schedueling Notification")
+                let content = UNMutableNotificationContent()
+                   content.title = "Congratulations!"
+                   content.body = "You've reached your destination! Tap to check your reward."
+                   content.sound = .default
 
-        let request = UNNotificationRequest(identifier: "congratulations", content: content, trigger: trigger)
-        
-        // Schedule the notification
-        UNUserNotificationCenter.current().add(request) { (error) in
-            if let error = error {
-                print("Error scheduling congratulations notification: \(error.localizedDescription)")
+                   // Trigger the notification in 5 seconds
+                   let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
+
+                   // Create the request with a unique identifier
+                   let request = UNNotificationRequest(identifier: "congratulations", content: content, trigger: trigger)
+
+                   // Add the request to the notification center
+                   UNUserNotificationCenter.current().add(request) { error in
+                       if let error = error {
+                           print("Error scheduling Hello notification: \(error.localizedDescription)")
+                       } else {
+                           print("Hello notification scheduled.")
+                       }
+                   }
+                
+            } else if let error = error {
+                // Handle the error for permission denial
+                print("Notification permission denied: \(error.localizedDescription)")
             }
         }
     }
+
 
 }

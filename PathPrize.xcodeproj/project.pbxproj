@@ -7,6 +7,31 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9062EBF72BDADE9400330074 /* shoe.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 9062EBF32BDADE9300330074 /* shoe.usdz */; };
+		9062EBFB2BDAE14000330074 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9062EBFA2BDAE14000330074 /* Coordinator.swift */; };
+		9062EBFD2BDAE18B00330074 /* ARViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9062EBFC2BDAE18B00330074 /* ARViewExtensions.swift */; };
+		9062EBFF2BDAE1BA00330074 /* ARView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9062EBFE2BDAE1BA00330074 /* ARView.swift */; };
+		9062EC042BDB0F5B00330074 /* ActivityService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9062EC032BDB0F5B00330074 /* ActivityService.swift */; };
+		9062EC062BDB0F6700330074 /* BusinessService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9062EC052BDB0F6700330074 /* BusinessService.swift */; };
+		9062EC082BDB0F7200330074 /* ProfileService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9062EC072BDB0F7200330074 /* ProfileService.swift */; };
+		9062EC0A2BDB0F7C00330074 /* RewardService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9062EC092BDB0F7C00330074 /* RewardService.swift */; };
+		9062EC0C2BDB0F9800330074 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9062EC0B2BDB0F9800330074 /* UserService.swift */; };
+		9062EC0E2BDB0FBF00330074 /* ActivityModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9062EC0D2BDB0FBF00330074 /* ActivityModel.swift */; };
+		9062EC102BDB0FD000330074 /* BusinessModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9062EC0F2BDB0FD000330074 /* BusinessModel.swift */; };
+		9062EC122BDB0FDC00330074 /* OfferModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9062EC112BDB0FDC00330074 /* OfferModel.swift */; };
+		9062EC142BDB0FF100330074 /* RewardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9062EC132BDB0FF100330074 /* RewardModel.swift */; };
+		907B8C912BD8469B00AB7948 /* DateHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 907B8C7D2BD8469B00AB7948 /* DateHelper.swift */; };
+		907B8C922BD8469B00AB7948 /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 907B8C7E2BD8469B00AB7948 /* Notifications.swift */; };
+		907B8C932BD8469B00AB7948 /* MapOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 907B8C802BD8469B00AB7948 /* MapOptions.swift */; };
+		907B8C942BD8469B00AB7948 /* MapUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 907B8C822BD8469B00AB7948 /* MapUtilities.swift */; };
+		907B8C952BD8469B00AB7948 /* locationCoordinateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 907B8C842BD8469B00AB7948 /* locationCoordinateExtension.swift */; };
+		907B8C962BD8469B00AB7948 /* MKCoordinateRegionExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 907B8C852BD8469B00AB7948 /* MKCoordinateRegionExtension.swift */; };
+		907B8C972BD8469B00AB7948 /* MeasurementFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 907B8C862BD8469B00AB7948 /* MeasurementFormatter.swift */; };
+		907B8C982BD8469B00AB7948 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 907B8C872BD8469B00AB7948 /* LocationManager.swift */; };
+		907B8C9E2BD8469B00AB7948 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 907B8C8E2BD8469B00AB7948 /* Settings.swift */; };
+		907B8C9F2BD8469B00AB7948 /* ShopsOnboarding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 907B8C8F2BD8469B00AB7948 /* ShopsOnboarding.swift */; };
+		9094903B2BD8C4EF008627DE /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9094903A2BD8C4EF008627DE /* MapView.swift */; };
+		9094903D2BD9F9E8008627DE /* LookAroundPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9094903C2BD9F9E8008627DE /* LookAroundPreview.swift */; };
 		90A89F0D2BD6EDA40049BF3A /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A89F0C2BD6EDA40049BF3A /* AuthManager.swift */; };
 		90A89F0F2BD6F8040049BF3A /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A89F0E2BD6F8040049BF3A /* RootView.swift */; };
 		90A89F122BD743FF0049BF3A /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A89F112BD743FF0049BF3A /* Router.swift */; };
@@ -54,6 +79,31 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		9062EBF32BDADE9300330074 /* shoe.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = shoe.usdz; sourceTree = "<group>"; };
+		9062EBFA2BDAE14000330074 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
+		9062EBFC2BDAE18B00330074 /* ARViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARViewExtensions.swift; sourceTree = "<group>"; };
+		9062EBFE2BDAE1BA00330074 /* ARView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARView.swift; sourceTree = "<group>"; };
+		9062EC032BDB0F5B00330074 /* ActivityService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityService.swift; sourceTree = "<group>"; };
+		9062EC052BDB0F6700330074 /* BusinessService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessService.swift; sourceTree = "<group>"; };
+		9062EC072BDB0F7200330074 /* ProfileService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileService.swift; sourceTree = "<group>"; };
+		9062EC092BDB0F7C00330074 /* RewardService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RewardService.swift; sourceTree = "<group>"; };
+		9062EC0B2BDB0F9800330074 /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
+		9062EC0D2BDB0FBF00330074 /* ActivityModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityModel.swift; sourceTree = "<group>"; };
+		9062EC0F2BDB0FD000330074 /* BusinessModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessModel.swift; sourceTree = "<group>"; };
+		9062EC112BDB0FDC00330074 /* OfferModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfferModel.swift; sourceTree = "<group>"; };
+		9062EC132BDB0FF100330074 /* RewardModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RewardModel.swift; sourceTree = "<group>"; };
+		907B8C7D2BD8469B00AB7948 /* DateHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateHelper.swift; sourceTree = "<group>"; };
+		907B8C7E2BD8469B00AB7948 /* Notifications.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
+		907B8C802BD8469B00AB7948 /* MapOptions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapOptions.swift; sourceTree = "<group>"; };
+		907B8C822BD8469B00AB7948 /* MapUtilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapUtilities.swift; sourceTree = "<group>"; };
+		907B8C842BD8469B00AB7948 /* locationCoordinateExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = locationCoordinateExtension.swift; sourceTree = "<group>"; };
+		907B8C852BD8469B00AB7948 /* MKCoordinateRegionExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKCoordinateRegionExtension.swift; sourceTree = "<group>"; };
+		907B8C862BD8469B00AB7948 /* MeasurementFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeasurementFormatter.swift; sourceTree = "<group>"; };
+		907B8C872BD8469B00AB7948 /* LocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
+		907B8C8E2BD8469B00AB7948 /* Settings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
+		907B8C8F2BD8469B00AB7948 /* ShopsOnboarding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShopsOnboarding.swift; sourceTree = "<group>"; };
+		9094903A2BD8C4EF008627DE /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
+		9094903C2BD9F9E8008627DE /* LookAroundPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LookAroundPreview.swift; sourceTree = "<group>"; };
 		90A89F0C2BD6EDA40049BF3A /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
 		90A89F0E2BD6F8040049BF3A /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
 		90A89F112BD743FF0049BF3A /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
@@ -113,6 +163,57 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9062EBF92BDAE13200330074 /* ar */ = {
+			isa = PBXGroup;
+			children = (
+				9062EBFA2BDAE14000330074 /* Coordinator.swift */,
+				9062EBFC2BDAE18B00330074 /* ARViewExtensions.swift */,
+				9062EBFE2BDAE1BA00330074 /* ARView.swift */,
+			);
+			path = ar;
+			sourceTree = "<group>";
+		};
+		9062EC022BDB0F4300330074 /* services */ = {
+			isa = PBXGroup;
+			children = (
+				9062EC032BDB0F5B00330074 /* ActivityService.swift */,
+				9062EC052BDB0F6700330074 /* BusinessService.swift */,
+				9062EC072BDB0F7200330074 /* ProfileService.swift */,
+				9062EC092BDB0F7C00330074 /* RewardService.swift */,
+				9062EC0B2BDB0F9800330074 /* UserService.swift */,
+			);
+			path = services;
+			sourceTree = "<group>";
+		};
+		907B8C7F2BD8469B00AB7948 /* Map */ = {
+			isa = PBXGroup;
+			children = (
+				907B8C802BD8469B00AB7948 /* MapOptions.swift */,
+				907B8C812BD8469B00AB7948 /* Utils */,
+				907B8C832BD8469B00AB7948 /* Extensions */,
+				907B8C872BD8469B00AB7948 /* LocationManager.swift */,
+			);
+			path = Map;
+			sourceTree = "<group>";
+		};
+		907B8C812BD8469B00AB7948 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				907B8C822BD8469B00AB7948 /* MapUtilities.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		907B8C832BD8469B00AB7948 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				907B8C842BD8469B00AB7948 /* locationCoordinateExtension.swift */,
+				907B8C852BD8469B00AB7948 /* MKCoordinateRegionExtension.swift */,
+				907B8C862BD8469B00AB7948 /* MeasurementFormatter.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		90A89F0B2BD6ED970049BF3A /* auth */ = {
 			isa = PBXGroup;
 			children = (
@@ -152,12 +253,20 @@
 		90BEF8792BD1A92D0093C814 /* PathPrize */ = {
 			isa = PBXGroup;
 			children = (
+				9062EC022BDB0F4300330074 /* services */,
+				907B8C7D2BD8469B00AB7948 /* DateHelper.swift */,
+				907B8C7E2BD8469B00AB7948 /* Notifications.swift */,
+				907B8C8E2BD8469B00AB7948 /* Settings.swift */,
+				907B8C8F2BD8469B00AB7948 /* ShopsOnboarding.swift */,
+				907B8C7F2BD8469B00AB7948 /* Map */,
+				9062EBF92BDAE13200330074 /* ar */,
 				90A89F102BD743F10049BF3A /* router */,
 				90F50DF82BD59A5B00B7D45B /* utils */,
 				90BEF8BB2BD1B2CF0093C814 /* models */,
 				90BEF8B82BD1B01C0093C814 /* Info.plist */,
 				90BEF8B42BD1AEBC0093C814 /* views */,
 				90BEF87A2BD1A92D0093C814 /* PathPrizeApp.swift */,
+				9062EBF32BDADE9300330074 /* shoe.usdz */,
 				90BEF87E2BD1A92E0093C814 /* Assets.xcassets */,
 				90BEF8802BD1A92E0093C814 /* Preview Content */,
 			);
@@ -210,6 +319,8 @@
 				90F50E092BD60C1C00B7D45B /* HomePage.swift */,
 				90A89F0E2BD6F8040049BF3A /* RootView.swift */,
 				90A89F132BD74BEE0049BF3A /* LoadingView.swift */,
+				9094903A2BD8C4EF008627DE /* MapView.swift */,
+				9094903C2BD9F9E8008627DE /* LookAroundPreview.swift */,
 			);
 			path = views;
 			sourceTree = "<group>";
@@ -220,6 +331,10 @@
 				90BEF8BC2BD1B2DB0093C814 /* ProfileModel.swift */,
 				90A89F152BD767100049BF3A /* UserProfile.swift */,
 				90A89F172BD76E0D0049BF3A /* AvatarImage.swift */,
+				9062EC0D2BDB0FBF00330074 /* ActivityModel.swift */,
+				9062EC0F2BDB0FD000330074 /* BusinessModel.swift */,
+				9062EC112BDB0FDC00330074 /* OfferModel.swift */,
+				9062EC132BDB0FF100330074 /* RewardModel.swift */,
 			);
 			path = models;
 			sourceTree = "<group>";
@@ -349,6 +464,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				90BEF8822BD1A92E0093C814 /* Preview Assets.xcassets in Resources */,
+				9062EBF72BDADE9400330074 /* shoe.usdz in Resources */,
 				90BEF87F2BD1A92E0093C814 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -374,22 +490,46 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				907B8C9F2BD8469B00AB7948 /* ShopsOnboarding.swift in Sources */,
 				90F50E062BD5FDBC00B7D45B /* RegistrationChoiceView.swift in Sources */,
+				9062EC102BDB0FD000330074 /* BusinessModel.swift in Sources */,
+				907B8C922BD8469B00AB7948 /* Notifications.swift in Sources */,
+				907B8C982BD8469B00AB7948 /* LocationManager.swift in Sources */,
+				907B8C952BD8469B00AB7948 /* locationCoordinateExtension.swift in Sources */,
 				90BEF8A62BD1ACFF0093C814 /* supabase.swift in Sources */,
 				90A89F162BD767100049BF3A /* UserProfile.swift in Sources */,
+				9062EBFB2BDAE14000330074 /* Coordinator.swift in Sources */,
 				90F50E022BD5F05300B7D45B /* AddProfileDetailsView.swift in Sources */,
 				90A89F0D2BD6EDA40049BF3A /* AuthManager.swift in Sources */,
+				907B8C972BD8469B00AB7948 /* MeasurementFormatter.swift in Sources */,
+				9062EC142BDB0FF100330074 /* RewardModel.swift in Sources */,
+				9094903D2BD9F9E8008627DE /* LookAroundPreview.swift in Sources */,
 				90A89F0F2BD6F8040049BF3A /* RootView.swift in Sources */,
+				9062EC0C2BDB0F9800330074 /* UserService.swift in Sources */,
+				907B8C942BD8469B00AB7948 /* MapUtilities.swift in Sources */,
 				90F50E0A2BD60C1C00B7D45B /* HomePage.swift in Sources */,
 				90F50DFC2BD5AD0300B7D45B /* LandingView.swift in Sources */,
+				9062EC0E2BDB0FBF00330074 /* ActivityModel.swift in Sources */,
 				90A89F142BD74BEE0049BF3A /* LoadingView.swift in Sources */,
 				90BEF8BD2BD1B2DB0093C814 /* ProfileModel.swift in Sources */,
+				9062EC122BDB0FDC00330074 /* OfferModel.swift in Sources */,
+				907B8C962BD8469B00AB7948 /* MKCoordinateRegionExtension.swift in Sources */,
 				90F50E082BD5FE6E00B7D45B /* SignUpBusinessView.swift in Sources */,
+				907B8C9E2BD8469B00AB7948 /* Settings.swift in Sources */,
 				90A89F122BD743FF0049BF3A /* Router.swift in Sources */,
+				9094903B2BD8C4EF008627DE /* MapView.swift in Sources */,
+				9062EC0A2BDB0F7C00330074 /* RewardService.swift in Sources */,
 				90F50DFE2BD5B81B00B7D45B /* LoginView.swift in Sources */,
+				9062EBFF2BDAE1BA00330074 /* ARView.swift in Sources */,
 				90F50E002BD5B82800B7D45B /* SignUpUserView.swift in Sources */,
+				907B8C912BD8469B00AB7948 /* DateHelper.swift in Sources */,
+				907B8C932BD8469B00AB7948 /* MapOptions.swift in Sources */,
+				9062EC062BDB0F6700330074 /* BusinessService.swift in Sources */,
 				90A89F182BD76E0D0049BF3A /* AvatarImage.swift in Sources */,
+				9062EBFD2BDAE18B00330074 /* ARViewExtensions.swift in Sources */,
+				9062EC042BDB0F5B00330074 /* ActivityService.swift in Sources */,
 				90BEF87B2BD1A92D0093C814 /* PathPrizeApp.swift in Sources */,
+				9062EC082BDB0F7200330074 /* ProfileService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -557,6 +697,11 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = PathPrize/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "Use Camera to Claim Reward";
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "";
+				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "";
+				INFOPLIST_KEY_NSLocationUsageDescription = "";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -587,6 +732,11 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = PathPrize/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "Use Camera to Claim Reward";
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "";
+				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "";
+				INFOPLIST_KEY_NSLocationUsageDescription = "";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

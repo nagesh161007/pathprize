@@ -13,8 +13,8 @@ struct LoadingView: View {
 
     var body: some View {
         ZStack {
-            Color.accentColor // Sets the accent color as the background for the entire view
-                .edgesIgnoringSafeArea(.all) // Extends the background color to the edges of the display
+            Color.accentColor // Sets the accent color as the background for the entire
+                .edgesIgnoringSafeArea(.all) // Extends the background color to the edges
 
             VStack {
                 Spacer()
@@ -25,16 +25,16 @@ struct LoadingView: View {
                     .foregroundColor(.white) // Ensures text color is set against the accent background
                     .padding(.bottom, 5)
                 
-                Image("landing-icon") // Make sure to replace "logo" with the actual asset name if different
+                Image("landing-icon") // Make sure to replace "landing-icon" with the actual asset name if different
                     .resizable()
                     .scaledToFit()
                     .frame(width: 300, height: 250)
                     .padding(.vertical)
-                    .rotationEffect(.degrees(isAnimating ? 360 : 0))
-                    .animation(.linear(duration: 20).repeatForever(autoreverses: false), value: isAnimating)
-                    .onAppear {
-                        isAnimating = true
-                    }
+//                    .opacity(isAnimating ? 2.0 : 0.5)
+//                    .animation(.easeInOut(duration: 1.0).repeatForever(autoreverses: true), value: isAnimating)
+//                    .onAppear {
+//                        isAnimating = true
+//                    }
                 
                 Text("Healthy living made intresting")
                     .font(.title3)

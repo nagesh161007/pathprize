@@ -15,9 +15,9 @@ struct RootView: View {
     var body: some View {
             Group {
                 if authManager.isLoading {
-                    ProgressView()
+                   LoadingView()
                 } else if authManager.isAuthenticated {
-                    HomePage().navigationBarBackButtonHidden(true).navigationTitle("Home Page")
+                    HomePage().navigationBarBackButtonHidden(true)
                 } else {
                     LandingView()
                 }
