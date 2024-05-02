@@ -17,7 +17,11 @@ struct RootView: View {
                 if authManager.isLoading {
                    LoadingView()
                 } else if authManager.isAuthenticated {
-                    HomePage().navigationBarBackButtonHidden(true)
+                    if(authManager.isBusiness){
+                        BusinessHomeView().navigationBarBackButtonHidden(true)
+                    } else {
+                        HomePage().navigationBarBackButtonHidden(true)
+                    }
                 } else {
                     LandingView()
                 }

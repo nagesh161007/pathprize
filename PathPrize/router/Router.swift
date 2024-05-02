@@ -37,4 +37,6 @@ enum NavigationDestination: Hashable {
     case signUpBusinessView
     case onboardingView
     case homeView
+    case shopsOnboarding
+    case businessHomeView
 }

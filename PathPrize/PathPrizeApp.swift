@@ -19,7 +19,7 @@ struct PathPrizeApp: App {
                     .navigationDestination(for: NavigationDestination.self) { destination in
                         switch destination {
                         case .homeView:
-                            HomePage().navigationBarBackButtonHidden(true).navigationTitle("Welcome Back")
+                            HomePage().navigationBarBackButtonHidden(true)
                         case .landingView:
                             LandingView().navigationBarBackButtonHidden(true)
                         case .signUpUserView:
@@ -30,7 +30,10 @@ struct PathPrizeApp: App {
                             RegistrationChoiceView().navigationTitle("Choose")
                         case .onboardingView:
                             PersonalInfoView().navigationBarBackButtonHidden(true)
-                        }
+                        case .shopsOnboarding:
+                            ShopsOnboarding().navigationBarBackButtonHidden(true)
+                        case .businessHomeView:
+                            BusinessHomeView().navigationBarBackButtonHidden(true)                        }
                     }
             }
             .environmentObject(authManager)

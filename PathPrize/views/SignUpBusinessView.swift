@@ -8,10 +8,9 @@
 import Foundation
 import SwiftUI
 
-
-
 struct SignUpBusinessView: View {
-    private var userType = UserType.business
+    @EnvironmentObject var router: Router
+    private var userType = UserType.business.rawValue
     @State private var email: String = ""
     @State private var password: String = ""
     @State private var confirmPassword: String = ""
@@ -84,7 +83,15 @@ struct SignUpBusinessView: View {
 
             // Sign Up button
             Button(action: {
-                // Handle sign-up logic here
+                Task {
+                    do {
+                        try await AuthManager.shared.signUp(email: email, password: password, userType: userType)
+                        router.navigate(to: .shopsOnboarding)
+                    } catch {
+                        // Handle errors (e.g., display an alert)
+                        print("Sign up failed: \(error.localizedDescription)")
+                    }
+                }
             }) {
                 Text("Join Us")
                     .fontWeight(.bold)

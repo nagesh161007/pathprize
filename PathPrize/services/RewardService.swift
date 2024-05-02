@@ -30,20 +30,30 @@ class RewardService {
     }
 
     // Function to create a reward
-    static func createReward(reward: RewardModel) async throws -> RewardModel {
+    static func createReward(reward: RewardModel) async throws -> Void {
         return try await supabase
             .from("rewards")
             .insert(reward)
+            .single()
             .execute().value
     }
 
     // Function to update a reward
-    static func updateReward(id: Int, updatedReward: RewardModel) async throws -> RewardModel {
-        return try await supabase
-            .from("rewards")
-            .update(updatedReward)
-            .eq("id", value: id)
-            .execute().value
+    static func updateReward(qrCode: String) async throws {
+        do {
+            // Simulate printing the QR code as part of the process
+            print("qrResult", qrCode)
+            // Perform the database update operation
+            try await supabase
+                .from("rewards")
+                .update(["status": "REDEEMED"])  // Ensure the field name is correct, it was "stats" before
+                .eq("qr_code", value: qrCode)
+                .execute()
+        } catch {
+            // Handle errors by rethrowing them
+            print("Failed to update reward: \(error)")
+            throw error
+        }
     }
 
     // Function to delete a reward

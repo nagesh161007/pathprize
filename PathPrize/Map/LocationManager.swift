@@ -60,7 +60,7 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
         
         monitor = await CLMonitor("RegionMonitor")
         
-        await monitor?.add( CLMonitor.CircularGeographicCondition(center: monitoringlocation, radius: 300), identifier: "quest-destination", assuming: .unsatisfied)
+        await monitor?.add( CLMonitor.CircularGeographicCondition(center: monitoringlocation, radius: 100), identifier: "quest-destination", assuming: .unsatisfied)
         
         print("Added Location to Monitor")
         
@@ -124,10 +124,21 @@ extension LocationManager {
         
         randomLocations.append(CLLocationCoordinate2D(latitude: 42.33077439474914, longitude: -71.09583226833279))
         
-        
         randomLocations.append(CLLocationCoordinate2D(latitude: 42.3325035776856, longitude: -71.09647817779118))
         
         randomLocations.append(CLLocationCoordinate2D(latitude: 42.3376185, longitude: -71.0901376))
+        
+        randomLocations.append(CLLocationCoordinate2D(latitude: 42.34016, longitude: -71.088898))
+        
+        randomLocations.append(CLLocationCoordinate2D(latitude: 42.3345896, longitude: -71.0889017))
+        
+        randomLocations.append(CLLocationCoordinate2D(latitude: 42.3375877, longitude: -71.0920608))
+        
+        randomLocations.append(CLLocationCoordinate2D(latitude: 42.3412141, longitude: -71.0872432))
+        
+        randomLocations.append(CLLocationCoordinate2D(latitude: 42.3401245, longitude: -71.0883243))
+        
+        
         
         print("random location generated")
 

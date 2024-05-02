@@ -35,7 +35,7 @@ struct HomePage: View {
                 }
                 .tag("activity").navigationTitle("Recent Activity")
             
-            SettingsView()
+            Settings()
                 .tabItem {
                     Image(systemName: "gear")
                     Text("Settings")
@@ -48,9 +48,6 @@ struct HomePage: View {
     }
 }
 
-
-// Dummy views for each tab
-struct SettingsView: View { var body: some View { Text("Settings") } }
 
 struct HomePage_Previews: PreviewProvider {
     static var previews: some View {

@@ -9,24 +9,36 @@ import Foundation
 import Supabase
 
 class BusinessService {
-    private var supabaseClient: SupabaseClient
     
-    init(supabaseClient: SupabaseClient) {
-        self.supabaseClient = supabaseClient
+    static func getBusinessIdForUser(userUUID: UUID) async throws -> Business {
+        do {
+            let business: Business = try await supabase
+                .from("business")
+                .select("*")
+                .eq("user_id", value: userUUID.uuidString)
+                .single()
+                .execute().value
+            return business
+        } catch {
+            // Log the error or handle it as needed
+            print("Failed to fetch business for user: \(error)")
+            throw error  // Rethrowing the error to be handled by the caller
+        }
     }
     
     // Function to fetch all businesses
-    func getAllBusinesses() async throws -> [Business] {
-        return try await supabaseClient
-            .from("businesses")
+    static func getAllBusinesses() async throws -> [Business] {
+        return try await supabase
+            .from("business")
             .select("*")
             .execute().value
     }
     
+    
     // Function to fetch a single business by ID
-    func getBusinessById(id: Int) async throws -> Business {
-        return try await supabaseClient
-            .from("businesses")
+    static func getBusinessById(id: Int) async throws -> Business {
+        return try await supabase
+            .from("business")
             .select("*")
             .eq("id", value: id)
             .single()
@@ -34,26 +46,26 @@ class BusinessService {
     }
 
     // Function to create a new business
-    func createBusiness(business: Business) async throws -> Business {
-        return try await supabaseClient
-            .from("businesses")
+    static func createBusiness(business: Business) async throws -> Business {
+        return try await supabase
+            .from("business")
             .insert(business)
             .execute().value
     }
 
     // Function to update an existing business
-    func updateBusiness(id: Int, updatedBusiness: Business) async throws -> Business {
-        return try await supabaseClient
-            .from("businesses")
+    static func updateBusiness(id: Int, updatedBusiness: Business) async throws -> Business {
+        return try await supabase
+            .from("business")
             .update(updatedBusiness)
             .eq("id", value: id)
             .execute().value
     }
 
     // Function to delete a business
-    func deleteBusiness(id: Int) async throws {
-        _ = try await supabaseClient
-            .from("businesses")
+    static func deleteBusiness(id: Int) async throws {
+        _ = try await supabase
+            .from("business")
             .delete()
             .eq("id", value: id)
             .execute().value

@@ -60,7 +60,7 @@ class Coordinator: NSObject, CLLocationManagerDelegate, ARCoachingOverlayViewDel
     
     func coachingOverlayViewDidDeactivate(_ coachingOverlayView: ARCoachingOverlayView) {
         
-        let coordinate = CLLocationCoordinate2D(latitude: 42.33196248895828, longitude: -71.09752618431293)
+        let coordinate = CLLocationCoordinate2D(latitude: 42.3401245, longitude: -71.0883243)
         
         let geoAnchor = ARGeoAnchor(coordinate: coordinate)
         let anchor = AnchorEntity(anchor: geoAnchor)
@@ -111,9 +111,9 @@ class Coordinator: NSObject, CLLocationManagerDelegate, ARCoachingOverlayViewDel
                     
                 } receiveValue: { entity in
                     anchor.name = "ShoeAnchor"
-                    entity.scale =  SIMD3<Float>(0.5, 0.5, 0)
                     anchor.addChild(entity)
                 }
+            
             
             
             print("Loading model to scene")

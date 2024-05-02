@@ -63,7 +63,7 @@ struct LoginView: View {
                     .fontWeight(.semibold)
                     .foregroundColor(.secondary)
                 
-                TextField("Password", text: $password)
+                SecureField("Password", text: $password)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
             }
             .padding(.vertical)
@@ -88,42 +88,81 @@ struct LoginView: View {
     }
     
     private func loginAction() {
+        print("login Action here")
         Task {
             do {
-                print(password)
                 guard let user = await AuthManager.shared.login(email: email, password: password) else {
                     print("Login failed: Credentials were incorrect or user does not exist.")
                     return
                 }
                 
-                let profileResponse: UserProfile = try await supabase
-                    .from("profiles")
-                    .select()
-                    .eq("id", value: user.id)
-                    .single()
-                    .execute().value
+                print(user.userMetadata)
+                print(user.userMetadata["user_type"])
                 
-                print(profileResponse)
+                let isUser =  user.userMetadata["user_type"] == "USER"
+               
                 
-                let onboardingState = profileResponse.onboardingState
-                
-                // Now you have the user's onboarding state
-                print("Onboarding state: \(onboardingState)")
-                
-                // Update the user's onboarding state or navigate based on it
-                if onboardingState == "ACCOUNT_CREATED" {
-                    DispatchQueue.main.async {
-                        Router.shared.navigate(to: .onboardingView)
+                if(isUser){
+                    let profileResponse: UserProfile = try await supabase
+                        .from("profiles")
+                        .select()
+                        .eq("id", value: user.id)
+                        .single()
+                        .execute().value
+                    
+                    print(profileResponse)
+                    
+                    let onboardingState = profileResponse.onboardingState
+                    
+                    // Now you have the user's onboarding state
+                    print("Onboarding state: \(onboardingState)")
+                    
+                    // Update the user's onboarding state or navigate based on it
+                    if onboardingState == "ACCOUNT_CREATED" {
+                        DispatchQueue.main.async {
+                            Router.shared.navigate(to: .onboardingView)
+                        }
+                    } else {
+                        DispatchQueue.main.async {
+                            print("redirecting to Home page")
+                            Router.shared.navigate(to: .homeView)
+    //                        Router.shared.navigateToRoot()
+                        }
                     }
                 } else {
-                    DispatchQueue.main.async {
-                        print("redirecting to Home page")
-                        Router.shared.navigate(to: .homeView)
-//                        Router.shared.navigateToRoot()
+                    print(user.id)
+                    let businessResponse: Business = try await supabase
+                        .from("business")
+                        .select()
+                        .eq("id", value: user.id)
+                        .single()
+                        .execute().value
+                    
+                    print("business Response")
+                    print(businessResponse)
+                    
+                    let onboardingState = businessResponse.onboardingState
+                    
+                    // Now you have the user's onboarding state
+                    print("Onboarding state: \(onboardingState)")
+                    
+                    // Update the user's onboarding state or navigate based on it
+                    if onboardingState == "ACCOUNT_CREATED" {
+                        DispatchQueue.main.async {
+                            Router.shared.navigate(to: .shopsOnboarding)
+                        }
+                    } else {
+                        DispatchQueue.main.async {
+                            print("redirecting to Home page")
+                            Router.shared.navigate(to: .businessHomeView)
+    //                        Router.shared.navigateToRoot()
+                        }
                     }
                 }
+                
             } catch {
                 // Handle errors
+                print("Login Error")
                 print("Error: \(error)")
             }
         }

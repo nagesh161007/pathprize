@@ -12,8 +12,23 @@ import MapKit
 enum QuestStatus {
     case locked
     case unlocked
+    case started
     case completed
+    case captured
 }
+
+let questNames = [
+    "The Lost Chalice of Surnia",
+    "Goblin's Hollow Retreat",
+    "The Crystal Caves of Torm",
+    "Echoes of the Fallen Knight",
+    "The Forgotten Library Ruins",
+    "Search for the Sunken City",
+    "Journey to the Enchanted Glade",
+    "Riddle of the Sphinx's Lair",
+    "The Dragon's Egg Nest",
+    "Secrets of the Ancient Monument"
+]
 
 
 struct MapView: View {
@@ -30,7 +45,8 @@ struct MapView: View {
     @State private var isLookAroundPresented = false
     @State private var activityId: Int?
     @State private var isArViewPresented = false
-
+    @State private var isQuestCompleted = false
+    
     private let locationManager = LocationManager.shared
 
     var body: some View {
@@ -46,7 +62,7 @@ struct MapView: View {
                 }
                 
                 ForEach(mapItems, id: \.self) { mapItem in
-                    MapCircle(center: mapItem.placemark.coordinate, radius: 300)
+                    MapCircle(center: mapItem.placemark.coordinate, radius: 100)
                         .foregroundStyle(.accent.opacity(0.4))
                 }
                 
@@ -92,29 +108,34 @@ struct MapView: View {
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(.leading, 20)
-                ActivityStatusView(sheetHeight: $sheetHeight, questStatus: $questStatus,
-                                selectedMapItem: $selectedMapItem, startAction: unlockQuest, claimReward: claimReward,  startNavigation: {
-                    Task {
-                        print("starting Navigation")
-                        await startNavigation()
-                    }
-                })
+                
+                if !isQuestCompleted {
+                    ActivityStatusView(sheetHeight: $sheetHeight, questStatus: $questStatus,
+                                       selectedMapItem: $selectedMapItem, isArViewPresented: $isArViewPresented, startAction: unlockQuest, claimReward: claimReward,   startNavigation: {
+                        Task {
+                            print("starting Navigation")
+                            await startNavigation()
+                        }
+                    })
+                }
             }.sheet(isPresented: $isLookAroundPresented) {
                 if let mapItem = selectedMapItem {
                     LocationPreviewLookAroundView(selectedResult: mapItem)
                 } else {
                     Text("No Location Selected")
                 }
-            }.sheet(isPresented: $isArViewPresented) {
+            }.sheet(isPresented: $isArViewPresented, onDismiss: {
+                questStatus = .completed
+            }) {
                 ARContentView()
             }
         }
     }
 
     private func claimReward() {
-        print("reward claim clicked")
         Task {
             do {
+                let currentUser = try await supabase.auth.session.user
                 // Ensure selectedMapItem and activityId are not nil
                 guard let activityId = activityId, let selectedMapItem = selectedMapItem else {
                     print("Error: Missing activityId or selectedMapItem")
@@ -133,19 +154,38 @@ struct MapView: View {
                     endLocationLatitude: selectedMapItem.placemark.coordinate.latitude,
                     status: "COMPLETED"
                 )
+                
                 print("Activity updated successfully.")
+                
+                let newReward = RewardModel(
+                    id: nil,
+                    createdAt: Date(),
+                    userId: currentUser.id,
+                    activityId:  Int64(activityId),
+                    rewardObjectUrl: "",
+                    status: "NOT_REDEEMED",
+                    offerId: 1,
+                    qrCode: UUID(),
+                    name: "Nike April Sale 30% Off",
+                    expiresAt: Date()
+                )
+                
+                try await RewardService.createReward(reward: newReward)
+                print("Reward updated successfully.")
+                isQuestCompleted = true
             } catch {
                 // Handle any errors that occur during the update
                 print("Error updating activity: \(error)")
             }
         }
-//        isArViewPresented = true
     }
+    
+    
 
     
     private func updateQuestStatusIfNeeded() {
         if locationManager.hasReachedLocation {
-            questStatus = .completed // Adjust as necessary for your `QuestStatus` values
+            questStatus = .captured // Adjust as necessary for your `QuestStatus` values
             print("Quest status updated to unlocked")
         }
     }
@@ -155,7 +195,10 @@ struct MapView: View {
         
         if let currentLocation = locationManager.manager.location {
             mapItems = locationManager.generateThreeRandomLocations(currentLocation: currentLocation).map { location in
-                MKMapItem(placemark: MKPlacemark(coordinate: location))
+                let mapItem = MKMapItem(placemark: MKPlacemark(coordinate: location))
+                let questName = questNames.randomElement()
+                mapItem.name = questName
+                return mapItem
             }
             print("mapItem count", mapItems.count)
             position = .region(MKCoordinateRegion(center: currentLocation.coordinate, latitudinalMeters: 5000, longitudinalMeters: 5000))
@@ -209,6 +252,7 @@ struct MapView: View {
     }
     
     private func startNavigation() async {
+        questStatus = .started
         if let currentLocation = locationManager.manager.location {
             createActivity(currentLocation: currentLocation)
         }
@@ -231,6 +275,7 @@ struct ActivityStatusView: View {
     @Binding var sheetHeight: CGFloat
     @Binding var questStatus: QuestStatus
     @Binding var selectedMapItem: MKMapItem?
+    @Binding var isArViewPresented: Bool
     var startAction: () async -> Void
     var claimReward: () -> Void
     var startNavigation: () -> Void
@@ -246,7 +291,7 @@ struct ActivityStatusView: View {
                     .padding()
                     .fontWeight(.bold)
 
-
+                Spacer()
                 if questStatus == .unlocked {
                     Button(action: selectedMapItem != nil ? startNavigation : {},
                            label: {
@@ -262,6 +307,36 @@ struct ActivityStatusView: View {
                            })
                            .disabled(selectedMapItem == nil) // Disable the button if no map item is selected
                            .opacity(selectedMapItem != nil ? 1.0 : 0.5) // Reduced opacity if no map item is selected
+                } else if questStatus == .started {
+                    Button(action: {},
+                           label: {
+                               HStack {
+                                   Image(systemName: selectedMapItem != nil ? "play.circle.fill" : "play.circle")
+                                       .font(.title2)
+                                   Text("Walk").fontWeight(.bold)
+                               }
+                               .padding()
+                               .foregroundColor(.white)
+                               .background(Color.blue)
+                               .cornerRadius(8)
+                           })
+                           .disabled(true) // Disable the button if no map item is selected
+                           .opacity(0.5) // Reduced opacity if no map item is selected
+                }else if questStatus == .captured {
+                    Button(action: {
+                        print("reward claim clicked")
+                        isArViewPresented = true
+                    }) {
+                        HStack {
+                            Image(systemName: "arkit")
+                                .font(.title2)
+                            Text("Capture").fontWeight(.bold)
+                        }
+                        .padding()
+                        .foregroundColor(.white)
+                        .background(Color.green)
+                        .cornerRadius(8)
+                    }
                 } else if questStatus == .completed {
                     Button(action: {
                         claimReward()
@@ -301,6 +376,7 @@ struct ActivityStatusView: View {
         .frame(height: sheetHeight)
         .background(Color.white)
         .cornerRadius(15)
+        
     }
 }
 

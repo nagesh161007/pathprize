@@ -16,26 +16,44 @@ struct RewardsView: View {
 
     var body: some View {
         NavigationView {
-            List(filteredRewards, id: \.id) { reward in
-                NavigationLink(destination: RewardDetailView(rewardId: reward.id)) {
-                    HStack {
-                        VStack(alignment: .leading) {
-                            Text(reward.name)
-                                .font(.headline)
-                                .foregroundColor(.primary)
-                            Text("Expires: \(reward.expiresAt, formatter: itemFormatter)")
-                                .font(.subheadline)
-                                .foregroundColor(.secondary)
-                        }
-                        Spacer()
-                        if reward.status == "REDEEMED" {
-                            Image(systemName: "checkmark.seal.fill")
-                                .foregroundColor(.green)
-                        }
-                    }
-                }
-            }
-            .navigationTitle("Rewards")
+            List {
+                   ForEach(filteredRewards, id: \.id) { reward in
+                       if reward.status == "REDEEMED" {
+                           HStack {
+                               VStack(alignment: .leading) {
+                                   Text(reward.name)
+                                       .font(.headline)
+                                       .foregroundColor(.primary)
+                                   Text("Expires: \(reward.expiresAt, formatter: itemFormatter)")
+                                       .font(.subheadline)
+                                       .foregroundColor(.secondary)
+                               }
+                               Spacer()
+                               Image(systemName: "checkmark.seal.fill")
+                                   .foregroundColor(.green)
+                           }
+                           .contentShape(Rectangle())
+                       } else {
+                           NavigationLink(destination: RewardDetailView(rewardId: reward.id)) {
+                               HStack {
+                                   VStack(alignment: .leading) {
+                                       Text(reward.name)
+                                           .font(.headline)
+                                           .foregroundColor(.primary)
+                                       Text("Expires: \(reward.expiresAt, formatter: itemFormatter)")
+                                           .font(.subheadline)
+                                           .foregroundColor(.secondary)
+                                   }
+                                   Spacer()
+                                   if reward.status == "NOT_REDEEMED" {
+                                       Image(systemName: "hourglass")
+                                           .foregroundColor(.orange)
+                                   }
+                               }
+                           }
+                       }
+                   }
+               }            .navigationTitle("Rewards")
             .searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .always))
             .onChange(of: searchText) { newValue in
                 filterRewards()
@@ -75,3 +93,8 @@ private let itemFormatter: DateFormatter = {
     formatter.timeStyle = .none
     return formatter
 }()
+
+
+#Preview {
+    RewardsView()
+}

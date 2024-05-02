@@ -13,6 +13,7 @@ class AuthManager: ObservableObject {
     @Published var isAuthenticated = false
     @Published var currentUser: User?
     @Published var isLoading = true
+    @Published var isBusiness = false
 
     
     func test(){
@@ -57,6 +58,7 @@ class AuthManager: ObservableObject {
                 // Since `user` is non-optional, we directly assign it
                 self.currentUser = user
                 self.isAuthenticated = true
+                self.isBusiness = user.userMetadata["user_type"] == "BUSINESS"
             }
         } catch {
             print("Error retrieving user: \(error.localizedDescription)")
@@ -64,6 +66,7 @@ class AuthManager: ObservableObject {
                 // Handle the error case by setting the user as nil and not authenticated
                 self.isAuthenticated = false
                 self.currentUser = nil
+                self.isBusiness = false
             }
         }
     }
